@@ -1,0 +1,15 @@
+nav {
+  background-color: #34495e; /* Dark blue-grey color */
+  padding: 10px;
+}
+
+nav a {
+  color: #ecf0f1; /* Light text color */
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}

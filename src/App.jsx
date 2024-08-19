@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Details from "./components/MailboxDetails";
+import Form from "./components/MailboxForm";
+import List from "./components/MailboxList";
+import NavBar from "./components/NavBar";
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [mailboxes, setmailboxes] = useState([]);
+
+  const addMail = (newMailData) => {
+    newMailData._id = mailboxes.length + 1;
+    setmailboxes([...mailboxes, newMailData]);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NavBar />
+      <h1>Mailbox</h1>
+      <Routes>
+        <Route path="/" />
+        <Route path="/Mailbox" element={<List mailboxes={mailboxes} />} />
+        <Route
+          path="/Mailbox/:mailId"
+          element={<Details mailboxes={mailboxes} />}
+        />
+        <Route path="/Mailbox/new" element={<Form addMail={addMail} />} />
+      </Routes>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
